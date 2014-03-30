@@ -8,6 +8,7 @@ import org.seasar.doma.jdbc.dialect.PostgresDialect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
@@ -71,7 +72,7 @@ public class AppConfig {
 
             @Override
             public DataSource getDataSource() {
-                return dataSource();
+                return new TransactionAwareDataSourceProxy(dataSource());
             }
         };
     }
